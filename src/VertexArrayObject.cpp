@@ -36,10 +36,12 @@ void VertexArrayObject::add_array_buffer(VertexBufferObject &vbo,
                                          GLuint location,
                                          GLuint size,
                                          GLuint offset,
-                                         GLuint stride) {
+                                         GLuint stride,
+                                         GLuint divisor) {
     bind();
     vbo.bind();
     _init_vertex_attrib_pointer(location, size, offset, stride);
+    glVertexAttribDivisor(location, divisor);
     vbo.unbind();
     unbind();
 }

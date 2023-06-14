@@ -17,7 +17,7 @@ struct BufferObject {
     }
 
     template<typename T>
-    void update(const std::vector<T>& data, size_t offset = 0, size_t count = 0) {
+    void update(const std::vector<T>& data, size_t count = 0, size_t offset = 0) {
         if(count == 0)
             count = data.size();
 

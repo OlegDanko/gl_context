@@ -18,7 +18,7 @@ struct VertexArrayObject {
 
     void _init_vertex_attrib_pointer(GLuint location, GLuint size, GLuint offset, GLuint stride, bool enable = true);
 
-    void add_array_buffer(VertexBufferObject& vbo, GLuint location, GLuint size, GLuint offset = 0, GLuint stride = 0);
+    void add_array_buffer(VertexBufferObject& vbo, GLuint location, GLuint size, GLuint offset = 0, GLuint stride = 0, GLuint divisor = 0);
 
     void add_array_buffer(VertexBufferObject& vbo, std::vector<AttribPointerParams> params, GLuint stride = 0);
 
