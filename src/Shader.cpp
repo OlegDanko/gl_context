@@ -1,6 +1,7 @@
 #include <Shader.hpp>
 
 #include <stdexcept>
+#include <iostream>
 
 Shader::Shader(const std::string &code, GLuint type) {
     id = glCreateShader(type);
@@ -16,6 +17,7 @@ Shader::Shader(const std::string &code, GLuint type) {
 
     std::string error_msg(info_log_length+1, '\0');
     glGetShaderInfoLog(id, info_log_length, NULL, &error_msg[0]);
+    std::cout << error_msg << std::endl;
     throw std::runtime_error("Error compiling shader:\n" + error_msg + "\n");
 }
 

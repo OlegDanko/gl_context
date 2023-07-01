@@ -10,9 +10,18 @@ struct BufferObject {
     GLuint id;
 
     template<typename T>
-    void load(const std::vector<T>& data) {
-        bind();
-        glBufferData(TYPE, sizeof(T)*data.size(), &data.at(0), GL_DYNAMIC_DRAW);
+    void init(size_t count) {
+        std::vector<T> vec(count);
+        upload(vec);
+    }
+
+    template<typename T>
+    void upload(const std::vector<T>& data, size_t count = 0) {
+        if(count == 0)
+            count = data.size();
+
+        bind();        
+        glBufferData(TYPE, sizeof(T)*count, &data.at(0), GL_DYNAMIC_DRAW);
         unbind();
     }
 
@@ -23,6 +32,16 @@ struct BufferObject {
 
         bind();
         glBufferSubData(TYPE, offset, sizeof(T)*count, &data.at(0));
+        unbind();
+    }
+
+    template<typename T>
+    void download(std::vector<T>& data, size_t count = 0, size_t offset = 0) {
+        if(count == 0)
+            count = data.size();
+
+        bind();
+        glGetBufferSubData(GL_ARRAY_BUFFER, offset, sizeof(T)*data.size(), &data.at(0));
         unbind();
     }
 
