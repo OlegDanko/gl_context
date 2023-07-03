@@ -1,5 +1,4 @@
 #include "GLContext.hpp"
-#include <GL/glew.h>
 #include <stdexcept>
 
 GLContext::GLContext() {
