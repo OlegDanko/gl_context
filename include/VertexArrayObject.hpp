@@ -14,6 +14,7 @@ struct VertexArrayObject {
     struct AttribPointerParams {
         GLuint location;
         GLuint size;
+        GLuint divisor = 0;
     };
 
     void _init_vertex_attrib_pointer(GLuint location, GLuint size, GLuint offset, GLuint stride, bool enable = true);

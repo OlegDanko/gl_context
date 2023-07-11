@@ -45,6 +45,14 @@ void ShaderProgram::set_uniformv(GLuint ID, const glm::vec4 *val, GLsizei count)
     glUniform4fv(ID, count, &val[0][0]);
 }
 
+void ShaderProgram::set_uniformv(GLuint ID, const glm::mat2 *val, GLsizei count) const {
+    glUniformMatrix2fv(ID, count, GL_FALSE, (GLfloat*)val);
+}
+
+void ShaderProgram::set_uniformv(GLuint ID, const glm::mat3 *val, GLsizei count) const {
+    glUniformMatrix3fv(ID, count, GL_FALSE, (GLfloat*)val);
+}
+
 void ShaderProgram::set_uniformv(GLuint ID, const glm::mat4 *val, GLsizei count) const {
     glUniformMatrix4fv(ID, count, GL_FALSE, (GLfloat*)val);
 }

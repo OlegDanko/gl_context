@@ -62,8 +62,8 @@ void VertexArrayObject::add_array_buffer(VertexBufferObject &vbo,
     for(auto p : params) {
         _init_vertex_attrib_pointer(p.location, p.size, offset, stride);
         offset += p.size*sizeof(GLfloat);
+        glVertexAttribDivisor(p.location, p.divisor);
     }
-
     vbo.unbind();
     unbind();
 }
