@@ -16,23 +16,36 @@ struct BufferObject {
     }
 
     template<typename T>
+    void upload(const T* data_ptr, size_t count) {
+        bind();
+        glBufferData(TYPE, sizeof(T)*count, data_ptr, GL_STATIC_DRAW);
+        unbind();
+    }
+
+    template<typename T>
     void upload(const std::vector<T>& data, size_t count = 0) {
         if(count == 0)
             count = data.size();
 
-        bind();        
-        glBufferData(TYPE, sizeof(T)*count, &data.at(0), GL_DYNAMIC_DRAW);
+        upload(&data.at(0), count);
+    }
+
+    template<typename T>
+    void update(const T* data_ptr, size_t count, size_t offset = 0) {
+        bind();
+        glBufferSubData(TYPE, offset, sizeof(T)*count, data_ptr);
         unbind();
     }
 
     template<typename T>
     void update(const std::vector<T>& data, size_t count = 0, size_t offset = 0) {
-        if(count == 0)
+        if(count == 0) {
+            if(data.size() == 0)
+                return;
             count = data.size();
+        }
 
-        bind();
-        glBufferSubData(TYPE, offset, sizeof(T)*count, &data.at(0));
-        unbind();
+        update(&data.at(0), count, offset);
     }
 
     template<typename T>
