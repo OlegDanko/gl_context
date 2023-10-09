@@ -53,6 +53,8 @@ public:
         const InUse& set_uniformv(GLuint ID, const glm::vec2*  val, GLsizei count = 1) const;
         const InUse& set_uniformv(GLuint ID, const glm::vec3*  val, GLsizei count = 1) const;
         const InUse& set_uniformv(GLuint ID, const glm::vec4*  val, GLsizei count = 1) const;
+        const InUse& set_uniformv(GLuint ID, const glm::mat2*  val, GLsizei count = 1) const;
+        const InUse& set_uniformv(GLuint ID, const glm::mat3*  val, GLsizei count = 1) const;
         const InUse& set_uniformv(GLuint ID, const glm::mat4*  val, GLsizei count = 1) const;
     };
 

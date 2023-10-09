@@ -50,14 +50,18 @@ void VertexArrayObject::Bound::add_array_buffer(ArrayBufferObject &vbo,
         stride = std::accumulate(params.begin(),
                                  params.end(),
                                  0,
-                                 [](auto s, auto p) { return s + p.size*sizeof(GLfloat); });
+                                 [](auto s, auto p) { return s + p.size; })
+                 * sizeof(GLfloat);
     }
 
     auto b = vbo.bind();
     GLuint offset{0};
     for(auto p : params) {
-        _init_vertex_attrib_pointer(p.location, p.size, offset, stride);
-        offset += p.size*sizeof(GLfloat);
+        _init_vertex_attrib_pointer(p.location,
+                                    p.size,
+                                    offset * sizeof(GLfloat),
+                                    stride);
+        offset += p.size;
+        glVertexAttribDivisor(p.location, p.divisor);
     }
-
 }

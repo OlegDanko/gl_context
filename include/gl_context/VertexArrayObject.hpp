@@ -10,6 +10,7 @@ struct VertexArrayObject {
     struct AttribPointerParams {
         GLuint location;
         GLuint size;
+        GLuint divisor = 0;
     };
 
     struct Bound : BoundResource<VertexArrayObject> {
