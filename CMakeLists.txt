@@ -14,6 +14,8 @@ add_library(gl_context
     src/GLContext.cpp
     src/ShaderProgram.cpp
     src/VertexArrayObject.cpp
+    src/Texture.cpp
+    src/BufferObject.cpp
 )
 target_link_libraries(gl_context
     OpenGL::GL

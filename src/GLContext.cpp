@@ -1,4 +1,4 @@
-#include "GLContext.hpp"
+#include <gl_context/GLContext.hpp>
 #include <stdexcept>
 
 GLContext::GLContext() {
