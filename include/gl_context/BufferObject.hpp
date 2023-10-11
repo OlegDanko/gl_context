@@ -16,11 +16,7 @@ struct BufferObject {
     struct Bound : BoundResource<BufferObject> {
         using base_t = BoundResource<BufferObject>;
         Bound(GLuint id) : base_t() {
-            base_t::bound = true;
             glBindBuffer(type, id);
-        }
-        ~Bound() {
-            base_t::bound = false;
         }
         template<typename T>
         Bound& init(size_t count) {

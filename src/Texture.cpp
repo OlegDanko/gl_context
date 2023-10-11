@@ -1,7 +1,7 @@
 #include <gl_context/Texture.hpp>
 
 template<>
-bool BoundResource<Texture>::bound = false;
+int BoundResource<Texture>::bound = 0;
 
 Texture::Texture() {
     glGenTextures(1, &id);

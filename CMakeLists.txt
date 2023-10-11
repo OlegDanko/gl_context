@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(game_engine LANGUAGES CXX)
+project(gl_context LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -9,19 +9,21 @@ set(OpenGL_GL_PREFERENCE "GLVND")
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 
-add_library(gl_context
+add_library(gl_context SHARED
     src/Shader.cpp
     src/GLContext.cpp
     src/ShaderProgram.cpp
     src/VertexArrayObject.cpp
-    src/Texture.cpp
     src/BufferObject.cpp
+    src/Texture.cpp
+    include/gl_context/BoundTexture.hpp
 )
+
 target_link_libraries(gl_context
     OpenGL::GL
     GLEW::GLEW
 )
-target_include_directories(gl_context PRIVATE
+target_include_directories(gl_context PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/
 )
 

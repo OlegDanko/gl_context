@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 template<>
-bool BoundResource<ShaderProgram>::bound = false;
+int BoundResource<ShaderProgram>::bound = 0;
 
 void ShaderProgram::attach_shader(const Shader &s) {
     glAttachShader(id, s.id);
@@ -39,6 +39,10 @@ const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const g
 }
 const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::vec4 val) const {
     glUniform4f(ID, val.x, val.y, val.z, val.a);
+    return *this;
+}
+const ShaderProgram::InUse &ShaderProgram::InUse::set_uniform(GLuint ID, const glm::ivec2 val) const {
+    glUniform2i(ID, val.x, val.y);
     return *this;
 }
 

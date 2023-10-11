@@ -1,8 +1,6 @@
 #pragma once
 
-#include "BufferObject.hpp"
-
-#include <type_traits>
+#include "BoundTexture.hpp"
 
 struct Texture {
     GLuint id;
@@ -16,23 +14,9 @@ struct Texture {
                     GLuint layered = GL_FALSE,
                     GLuint layer = 0);
 
-    template<GLuint type>
-    struct Bound : BoundResource<Texture> {
-        using base_t = BoundResource<Texture>;
-
-        Bound(GLuint id) : base_t() {
-            glBindTexture(type, id);
-        }
-
-        std::enable_if_t<type == GL_TEXTURE_BUFFER, Bound&>
-        tex_buffer(ArrayBufferObject& vbo, GLuint format) {
-            glTexBuffer(type, format, vbo.id);
-            return *this;
-        }
-    };
 
     template<GLuint type>
-    Bound<type> bind() {
-        return {id};
+    auto bind() {
+        return BoundTexture<tex_type_to_typename_t<type>>{id};
     }
 };

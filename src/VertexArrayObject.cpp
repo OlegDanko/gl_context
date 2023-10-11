@@ -2,7 +2,7 @@
 #include <numeric>
 
 template<>
-bool BoundResource<VertexArrayObject>::bound = false;
+int BoundResource<VertexArrayObject>::bound = 0;
 
 VertexArrayObject::VertexArrayObject() {
     glGenVertexArrays(1, &id);

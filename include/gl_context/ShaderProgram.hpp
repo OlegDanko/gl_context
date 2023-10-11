@@ -47,6 +47,7 @@ public:
         const InUse& set_uniform(GLuint ID, const glm::vec3  val) const;
         const InUse& set_uniform(GLuint ID, const glm::vec4  val) const;
         const InUse& set_uniform(GLuint ID, const glm::mat4  val) const;
+        const InUse& set_uniform(GLuint ID, const glm::ivec2 val) const;
 
         const InUse& set_uniformv(GLuint ID, const int*   val, GLsizei count = 1) const;
         const InUse& set_uniformv(GLuint ID, const float* val, GLsizei count = 1) const;

@@ -1,7 +1,7 @@
 #include <gl_context/BufferObject.hpp>
 
 template<>
-bool BoundResource<BufferObject>::bound = false;
+int BoundResource<BufferObject>::bound = 0;
 
 
 BufferObject::BufferObject() {
