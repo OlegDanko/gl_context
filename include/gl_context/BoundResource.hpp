@@ -21,4 +21,6 @@ struct BoundResource {
     BoundResource(BoundResource&&) { ++bound; }
     BoundResource& operator=(const BoundResource&) = delete;
     BoundResource& operator=(BoundResource&&) { ++bound; }
+
+    operator bool() { return true; }
 };

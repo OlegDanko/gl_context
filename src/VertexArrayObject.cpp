@@ -17,11 +17,12 @@ VertexArrayObject::Bound VertexArrayObject::bind()
     return {id};
 }
 
-void VertexArrayObject::Bound::_init_vertex_attrib_pointer(GLuint location,
-                                                    GLuint size,
-                                                    GLuint offset,
-                                                    GLuint stride,
-                                                    bool enable) {
+VertexArrayObject::Bound&
+VertexArrayObject::Bound::_init_vertex_attrib_pointer(GLuint location,
+                                                      GLuint size,
+                                                      GLuint offset,
+                                                      GLuint stride,
+                                                      bool enable) {
     glVertexAttribPointer(location,
                           size,
                           GL_FLOAT,
@@ -30,28 +31,33 @@ void VertexArrayObject::Bound::_init_vertex_attrib_pointer(GLuint location,
                           reinterpret_cast<GLvoid*>(offset));
     if(enable)
         glEnableVertexAttribArray(location);
+
+    return *this;
 }
 
-void VertexArrayObject::Bound::add_array_buffer(ArrayBufferObject &vbo,
-                                         GLuint location,
-                                         GLuint size,
-                                         GLuint offset,
-                                         GLuint stride,
-                                         GLuint divisor) {
+VertexArrayObject::Bound&
+VertexArrayObject::Bound::add_array_buffer(ArrayBufferObject &vbo,
+                                           GLuint location,
+                                           GLuint size,
+                                           GLuint offset,
+                                           GLuint stride,
+                                           GLuint divisor) {
     auto b = vbo.bind();
     _init_vertex_attrib_pointer(location, size, offset, stride);
     glVertexAttribDivisor(location, divisor);
+
+    return *this;
 }
 
-void VertexArrayObject::Bound::add_array_buffer(ArrayBufferObject &vbo,
-                                         std::vector<AttribPointerParams> params,
-                                         GLuint stride) {
+VertexArrayObject::Bound&
+VertexArrayObject::Bound::add_array_buffer(ArrayBufferObject &vbo,
+                                           std::vector<AttribPointerParams> params,
+                                           GLuint stride) {
     if(stride == 0) {
         stride = std::accumulate(params.begin(),
                                  params.end(),
                                  0,
-                                 [](auto s, auto p) { return s + p.size; })
-                 * sizeof(GLfloat);
+                                 [](auto s, auto p) { return s + p.size; }) * sizeof(GLfloat);
     }
 
     auto b = vbo.bind();
@@ -64,4 +70,6 @@ void VertexArrayObject::Bound::add_array_buffer(ArrayBufferObject &vbo,
         offset += p.size;
         glVertexAttribDivisor(p.location, p.divisor);
     }
+
+    return *this;
 }
