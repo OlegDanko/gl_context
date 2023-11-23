@@ -15,8 +15,8 @@ struct Texture {
                     GLuint layer = 0);
 
 
-    template<GLuint type>
+    template<GLint type>
     auto bind() {
-        return BoundTexture<tex_type_to_typename_t<type>>{id};
+        return BoundTexture<type>{id};
     }
 };

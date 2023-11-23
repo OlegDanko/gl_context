@@ -16,7 +16,7 @@ add_library(gl_context SHARED
     src/VertexArrayObject.cpp
     src/BufferObject.cpp
     src/Texture.cpp
-    include/gl_context/BoundTexture.hpp
+    src/BoundTexture.cpp
 )
 
 target_link_libraries(gl_context
