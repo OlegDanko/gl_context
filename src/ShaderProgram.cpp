@@ -29,20 +29,30 @@ const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const f
     glUniform1f(ID, val);
     return *this;
 }
-const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::vec2 val) const {
+const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::vec2& val) const {
     glUniform2f(ID, val.x, val.y);
     return *this;
 }
-const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::vec3 val) const {
+const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::vec3& val) const {
     glUniform3f(ID, val.x, val.y, val.z);
     return *this;
 }
-const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::vec4 val) const {
+const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::vec4& val) const {
     glUniform4f(ID, val.x, val.y, val.z, val.a);
     return *this;
 }
-const ShaderProgram::InUse &ShaderProgram::InUse::set_uniform(GLuint ID, const glm::ivec2 val) const {
+const ShaderProgram::InUse &ShaderProgram::InUse::set_uniform(GLuint ID, const glm::ivec2& val) const {
     glUniform2i(ID, val.x, val.y);
+    return *this;
+}
+const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::ivec3& val) const
+{
+    glUniform3i(ID, val.x, val.y, val.z);
+    return *this;
+}
+const ShaderProgram::InUse& ShaderProgram::InUse::set_uniform(GLuint ID, const glm::ivec4& val) const
+{
+    glUniform4i(ID, val.x, val.y, val.z, val.a);
     return *this;
 }
 
