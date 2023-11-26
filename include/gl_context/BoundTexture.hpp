@@ -29,6 +29,19 @@ struct BoundTexture : BoundResource<Texture>{
     }
 
     template<typename T>
+    auto& tex_image_1d(std::vector<T>& img) {
+        static_assert(is_one_of(type, GL_TEXTURE_1D));
+        glTexImage1D(type,
+                     0,
+                     type_to_internal_code<T>(),
+                     img.size(),
+                     0,
+                     type_to_channels_code<T>(),
+                     type_to_type_code<T>(),
+                     &img.front());
+        return *this;
+    }
+    template<typename T>
     auto& tex_image_2d(std::vector<T>& img, int width, int height) {
         static_assert(is_one_of(type, GL_TEXTURE_2D));
         glTexImage2D(type,
@@ -58,6 +71,15 @@ struct BoundTexture : BoundResource<Texture>{
         return *this;
     }
     template<typename T>
+    auto& tex_storage_1d(int width) {
+        static_assert(is_one_of(type, GL_TEXTURE_1D));
+        glTexStorage1D(type,
+                       1,
+                       type_to_internal_code<T>(),
+                       width);
+        return *this;
+    }
+    template<typename T>
     auto& tex_storage_2d(int width, int height) {
         static_assert(is_one_of(type, GL_TEXTURE_2D));
         glTexStorage2D(type,
@@ -80,7 +102,7 @@ struct BoundTexture : BoundResource<Texture>{
     }
     template<typename T>
     auto& get_tex_image(std::vector<T>& img) {
-        static_assert(is_one_of(type, GL_TEXTURE_2D, GL_TEXTURE_3D));
+        static_assert(is_one_of(type, GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D));
         glGetTexImage(type,
                       0,
                       type_to_channels_code<T>(),
